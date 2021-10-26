@@ -300,5 +300,12 @@ let shuffleBoys_10_11_under_30 = shuffleCategories(boys_10_11_under_30);
 console.log(shuffleBoys_10_11_under_30);
 
 for (let i = 0; i < shuffleBoys_10_11_under_30.length; i += 2) {
-    console.log(`${shuffleBoys_10_11_under_30[i]} VS ${shuffleCategories[i+1]}`);
+    let a = shuffleBoys_10_11_under_30[i];
+    let b = shuffleBoys_10_11_under_30[i+1];
+        if (b == undefined) {
+            console.log(a.name);  
+            break;
+        }
+        console.log(`${a.name} VS ${b.name}`);
+  
 }
