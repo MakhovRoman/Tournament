@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="css/pull-grid.css">
+    <title>Tournament</title>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header class="header">
+        <nav class="navigation">
+          <ul class="navigation__list">
+            <li class="navigation__item"><a href="index.html" class="link navigation__link">Главная</a></li>
+            <li class="navigation__item"><a href="consolidated.html" class="link navigation__link">Сводная</a></li>
+            <li class="navigation__item"><a href="pull.html" class="link navigation__link">Пули</a></li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+      <section class="pull">
+        <div class="fighter round1 number-1"></div>
+        <div class="fighter round1 number-2"></div>
+        <div class="fighter round1 number-3"></div>
+        <div class="fighter round1 number-4"></div>
+        <div class="fighter round1 number-5"></div>
+        <div class="fighter round1 number-6"></div>
+        <div class="fighter round1 number-7"></div>
+        <div class="fighter round1 number-8"></div>
+        <div class="fighter round1 number-9"></div>
+        <div class="fighter round1 number-10"></div>
+        <div class="fighter round1 number-11"></div>
+        <div class="fighter round1 number-12"></div>
+        <div class="fighter round1 number-13"></div>
+        <div class="fighter round1 number-14"></div>
+        <div class="fighter round1 number-15"></div>
+        <div class="fighter round1 number-16"></div>
+        <div class="fighter round2 number-2-1"></div>
+        <div class="fighter round2 number-2-2"></div>
+        <div class="fighter round2 number-2-3"></div>
+        <div class="fighter round2 number-2-4"></div>
+        <div class="fighter round2 number-2-5"></div>
+        <div class="fighter round2 number-2-6"></div>
+        <div class="fighter round2 number-2-7"></div>
+        <div class="fighter round2 number-2-8"></div>
+        <div class="fighter round3 number-3-1"></div>
+        <div class="fighter round3 number-3-2"></div>
+        <div class="fighter round3 number-3-3"></div>
+        <div class="fighter round3 number-3-4"></div>
+        <div class="fighter round4 number-4-1"></div>
+        <div class="fighter round4 number-4-2"></div>
+        <div class="fighter winner number-winner"></div>
+      </section>
+      <aside class="left">
+        <button class="setPull">Расчитать пулю</button>
+      </aside>
+      <aside class="right">
+        <div class="timer">
+          <div class="timer__display"><span class="minutes"></span> : <span class="seconds"></span></в>
+        </div>
+        <div class="timerList">
+          <button class="timerList__item">1 минута </button>
+          <button class="timerList__item">1,5 минуты </button>
+          <button class="timerList__item">2 минуты</button>
+          <button class="timerList__item">3 минуты</button>
+        </div>
+        <div class="timerControls">
+          <button class="timerControls__button">
+            <img src="pictures/icons/play.png" alt="">
+          </button>
+          <button class="timerControls__button">
+            <img src="pictures/icons/refresh.png" alt="">
+          </button>
+          <button class="timerControls__button timerControls__button_hidden">
+            <img src="pictures/icons/stop.png" alt="">
+          </button>
+        </div>
+      </aside>
+      </main>
+      <footer></footer>
+    </div>
+    <script src="scripts/pull-list.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/timer.js"></script>
+
+  </body>
+</html>

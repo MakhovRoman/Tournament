@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/consolidate.css">
+  <title>Consolidate</title>
+</head>
+<body>
+  <header class="header">
+    <nav class="navigation">
+      <ul class="navigation__list">
+        <li class="navigation__item"><a href="index.html" class="link navigation__link">Главная</a></li>
+        <li class="navigation__item"><a href="consolidated.html" class="link navigation__link">Сводная</a></li>
+        <li class="navigation__item"><a href="pull.html" class="link navigation__link">Пули</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="consolidate__main">
+    <div class="consolidate__panel">
+      <ul class="sortList">
+        <li class="sortList__li"><input type="radio" name="sort" value="fullName-up" class="sortList__input" data-sort-name="fullName">По имени &#129047;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="fullName-down" class="sortList__input" data-sort-name="fullName" data-sort-reverse="true">По имени &#129045;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="age-up" class="sortList__input" data-sort-name="age">По возрасту &#129047;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="age-down" class="sortList__input" data-sort-name="age" data-sort-reverse="true">По возрасту &#129045;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="weight-up" class="sortList__input" data-sort-name="weight">По весу &#129047;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="weight-down" class="sortList__input" data-sort-name="weight" data-sort-reverse="true">По весу &#129045;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="gender-up" class="sortList__input" data-sort-name="gender">По полу &#129047;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="gender-down" class="sortList__input" data-sort-name="gender" data-sort-reverse="true">По полу &#129045;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="city-up" class="sortList__input" data-sort-name="city">По городу &#129047;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="city-down" class="sortList__input" data-sort-name="city" data-sort-reverse="true">По городу &#129045;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="coach-up" class="sortList__input" data-sort-name="coach">По тренеру &#129047;</li>
+        <li class="sortList__li"><input type="radio" name="sort" value="coach-down" class="sortList__input" data-sort-name="coach" data-sort-reverse="true">По тренеру &#129045;</li>
+      </ul>
+    </div>
+    <table class="consolidate__table">
+      <tr class="consolidate__header">
+        <th class="consolidate__cell consolidate__head">№</th>
+        <th class="consolidate__cell consolidate__head">Фамилия</th>
+        <th class="consolidate__cell consolidate__head">Имя</th>
+        <th class="consolidate__cell consolidate__head">Возраст</th>
+        <th class="consolidate__cell consolidate__head">Вес</th>
+        <th class="consolidate__cell consolidate__head">Кю</th>
+        <th class="consolidate__cell consolidate__head">Пол</th>
+        <th class="consolidate__cell consolidate__head">Город</th>
+        <th class="consolidate__cell consolidate__head">Тренер</th>
+      </tr>
+    </table>
+
+    <div class="consolidate__categories">
+
+    </div>
+  </main>
+  <footer>
+
+  </footer>
+  <script src="scripts/pull-list.js"></script>
+  <script src="scripts/consolidate.js"></script>
+</body>
+</html>
