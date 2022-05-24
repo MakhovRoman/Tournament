@@ -29,33 +29,58 @@ const tableList = document.querySelectorAll('.pull__table');
 
 let currentPull; // переменная для отображаемой пули участников
 
+let currentFighterAreas = []; // массив для хранения отображаемых полей в пуле
+let currentCatShow; // переменная для хранения названия текущей переменной
+
+function showCurrentShuffledFighters(currentCat) {
+  if (!shuffleCategories.get(currentCat)) {
+    console.log('Error')
+    return;
+  } else {
+    let current;
+
+    for ([key, value] of shuffleCategories.entries()) {
+      if (key == currentCat) current = value;
+    }
+
+    for(let i = 0; i < currentFighterAreas.length; i++) {
+      console.log(value[i].fullName)
+      currentFighterAreas[i].textContent = value[i].fullName;
+    }
+  }
+}
+
 
 function checkPullTableList() {                            // функция для отображения актуальной таблицы
   for (let i = 0; i < pullOptionList.length; i++) {
+
     if (!tableList[i].classList.contains('pull__table_hide')) {
       tableList[i].classList.add('pull__table_hide');
       if (tableList[i].classList.contains('pull__table_current')) tableList[i].classList.remove('pull__table_current');
     }
+
     if (pullOptionList[i].selected == true) {
       tableList[i].classList.remove('pull__table_hide');
       tableList[i].classList.add('pull__table_current');
 
       for (let [cat, participants] of localCategories.entries()) {
+
         if (cat == pullOptionList[i].textContent) {   // присваиваю переменной currentPull значение, равное количетву людей в выбранной категории
           currentPull = participants.length;
-
+          currentCatShow = cat;
         }
       }
     }
+
   }
 
   checkCurrentPull();
+  showCurrentShuffledFighters(currentCatShow);
 }
 
 
 /* ===================== Изменение пули под количество участников ============================ */
 
-const stylePullList = new Map();  // коллекция для хранения стилей оформления пули в зависимости от количества участников
 const pullFighterList = Array.from(document.getElementsByClassName('pull__fighter'));  //  массив с полями пулл-листа
 const pullDrawGrid = Array.from(document.querySelectorAll('.pull__draw_grid'));   // массив с блоком нумерации боя
 const rightGridList = Array.from(document.querySelectorAll('.pull__draw_right')); // массив с правой частью сетки
@@ -69,6 +94,8 @@ const pullDraw4 = document.querySelector('.pull__draw_4');
 const pullDraw2 = document.querySelector('.pull__draw_2');
 
 let fighterNumber = 0; // переменная для нумерации полей бойцов в пули
+
+
 
 
 function checkCurrentPull() {       // функция для проверки и изменения вида сетки
@@ -232,6 +259,8 @@ function checkCurrentPull() {       // функция для проверки и
 
     }
   }
+
+
 }
 
 
@@ -258,7 +287,7 @@ let currentCategories; // переменная для хранения масс�
  function shuffle(array) {
   let coachList = new Set(); // создаю коллекцию тренеров в данной категории
   let listByCoach = new Map(); // коллекция для хранения массивов участников по тренерам
-  let currentFighterAreas = [];
+
 
   for (let item of array) { // сканирую список участникови добавляю тренеров
     coachList.add(item.coach);
@@ -294,13 +323,12 @@ let currentCategories; // переменная для хранения масс�
   }
 
   for (let i = 0; i < array.length; i++) {
-    currentFighterAreas[i].textContent = array[i].fullName;
+    //currentFighterAreas[i].textContent = array[i].fullName;
   }
 
   console.log(array);
 
   shuffleCategories.set(currentCategoriesIndex, array);
-
 }
 
 function makeDrawList(categories) {
@@ -318,9 +346,14 @@ function makeDrawList(categories) {
 }
 
 
-suffleCurrentButton.addEventListener('click', () => makeDrawList(localCategories));
+suffleCurrentButton.addEventListener('click', () => {
+  makeDrawList(localCategories);
+  showCurrentShuffledFighters(currentCatShow);
+});
 suffleAllButton.addEventListener('click', () => {
   for (let cat of localCategories.keys()) {
-    makeDrawList(cat);
+    currentCategoriesIndex = cat;
+    currentCategories = localCategories.get(cat);
+    shuffle(currentCategories);
   }
 })
