@@ -32,20 +32,55 @@ let currentPull; // переменная для отображаемой пул�
 let currentFighterAreas = []; // массив для хранения отображаемых полей в пуле
 let currentCatShow; // переменная для хранения названия текущей переменной
 
+let currentCategoriesIndex; // переменная для хранения индекса (названия категории)
+let currentCategories; // переменная для хранения массива участников текущей категории
+
+
+
+const pullFighterList = Array.from(document.getElementsByClassName('pull__fighter'));  //  массив с полями пулл-листа
+const pullDrawGrid = Array.from(document.querySelectorAll('.pull__draw_grid'));   // массив с блоком нумерации боя
+const rightGridList = Array.from(document.querySelectorAll('.pull__draw_right')); // массив с правой частью сетки
+const rightParticipiantsList = document.querySelector('.participiantsList_right'); // блок с бойцами в правой части сетки
+const leftParticipiantsList = document.querySelector('.participiantsList_left'); // блок с бойцами в левой части сетки
+const pullContentWrapper = document.querySelector('.pull__content-wrapper'); // элемент для отображения пули
+const leftPairList = Array.from(leftParticipiantsList.querySelectorAll('.pull__content_item')); // массив с парами бойцов с левой стороны
+const pullDraw16 = document.querySelector('.pull__draw_16');  // переменная для хранения блока сетка 1/16 финала
+const pullDraw8 = document.querySelector('.pull__draw_8');
+const pullDraw4 = document.querySelector('.pull__draw_4');
+const pullDraw2 = document.querySelector('.pull__draw_2');
+
+let fighterNumber = 0; // переменная для нумерации полей бойцов в пули
+
+
+function resetCurrentFighterAreas() {
+  // обнуляю массив с актуальными полями отображения бойцов
+  for (let i = currentFighterAreas.length - 1; i >= 0; i--) {
+    currentFighterAreas.splice(i);
+  }
+}
+
+function makeCurrentFighterAreas() {
+  for (let area of pullFighterList) {
+    if (!area.classList.contains('pull__fighter_hide')) currentFighterAreas.push(area);
+  }
+}
+
+
+
 function showCurrentShuffledFighters(currentCat) {
+  let current;
+
   if (!shuffleCategories.get(currentCat)) {
     console.log('Error')
     return;
   } else {
-    let current;
 
     for ([key, value] of shuffleCategories.entries()) {
       if (key == currentCat) current = value;
     }
 
-    for(let i = 0; i < currentFighterAreas.length; i++) {
-      console.log(value[i].fullName)
-      currentFighterAreas[i].textContent = value[i].fullName;
+    for(let i = 0; i <= currentFighterAreas.length; i++) {
+      if (current[i]) currentFighterAreas[i].textContent = current[i].fullName;
     }
   }
 }
@@ -81,27 +116,17 @@ function checkPullTableList() {                            // функция д�
 
 /* ===================== Изменение пули под количество участников ============================ */
 
-const pullFighterList = Array.from(document.getElementsByClassName('pull__fighter'));  //  массив с полями пулл-листа
-const pullDrawGrid = Array.from(document.querySelectorAll('.pull__draw_grid'));   // массив с блоком нумерации боя
-const rightGridList = Array.from(document.querySelectorAll('.pull__draw_right')); // массив с правой частью сетки
-const rightParticipiantsList = document.querySelector('.participiantsList_right'); // блок с бойцами в правой части сетки
-const leftParticipiantsList = document.querySelector('.participiantsList_left'); // блок с бойцами в левой части сетки
-const pullContentWrapper = document.querySelector('.pull__content-wrapper'); // элемент для отображения пули
-const leftPairList = Array.from(leftParticipiantsList.querySelectorAll('.pull__content_item')); // массив с парами бойцов с левой стороны
-const pullDraw16 = document.querySelector('.pull__draw_16');  // переменная для хранения блока сетка 1/16 финала
-const pullDraw8 = document.querySelector('.pull__draw_8');
-const pullDraw4 = document.querySelector('.pull__draw_4');
-const pullDraw2 = document.querySelector('.pull__draw_2');
-
-let fighterNumber = 0; // переменная для нумерации полей бойцов в пули
-
-
-
 
 function checkCurrentPull() {       // функция для проверки и изменения вида сетки
   let diff = pullFighterList.length - currentPull;    // переменная для хранения разницы между максимальныи количеством участников (32) и текущим количеством участников
   let halfDiff = pullFighterList.length / 2 - currentPull;
   let quaterDiff = leftPairList.length - currentPull;
+
+  for (let i = 0; i < pullFighterList.length; i++) {
+    pullFighterList[i].textContent = '';
+  }
+
+  resetCurrentFighterAreas();
 
   for (let i = 0; i < pullFighterList.length; i++) {   // обнуляю стили бойцов, чтобы корректно прорисовывалась страница для каждой категории
     if (pullFighterList[i].classList.contains('pull__fighter_hide')) pullFighterList[i].classList.remove('pull__fighter_hide');
@@ -260,7 +285,7 @@ function checkCurrentPull() {       // функция для проверки и
     }
   }
 
-
+  makeCurrentFighterAreas();
 }
 
 
@@ -280,8 +305,7 @@ let shuffleCategories = new Map();  // коллекция для хранени�
 const suffleCurrentButton = document.querySelector('.suffle__current');
 const suffleAllButton = document.querySelector('.suffle__all');
 
-let currentCategoriesIndex; // переменная для хранения индекса (названия категории)
-let currentCategories; // переменная для хранения массива участников текущей категории
+
 
  // тасование Фишера-Йетса
  function shuffle(array) {
@@ -303,9 +327,9 @@ let currentCategories; // переменная для хранения масс�
     }
   }
 
-  for (let area of pullFighterList) {
-    if (!area.classList.contains('pull__fighter_hide')) currentFighterAreas.push(area);
-  }
+  resetCurrentFighterAreas();
+
+  makeCurrentFighterAreas();
 
   for (let area of pullFighterList) {
     //if ()
@@ -322,10 +346,11 @@ let currentCategories; // переменная для хранения масс�
     [array[i], array[j]] = [array[j], array[i]];
   }
 
+  /*
   for (let i = 0; i < array.length; i++) {
-    //currentFighterAreas[i].textContent = array[i].fullName;
+    currentFighterAreas[i].textContent = array[i].fullName;
   }
-
+  */
   console.log(array);
 
   shuffleCategories.set(currentCategoriesIndex, array);
@@ -355,5 +380,9 @@ suffleAllButton.addEventListener('click', () => {
     currentCategoriesIndex = cat;
     currentCategories = localCategories.get(cat);
     shuffle(currentCategories);
-  }
+  };
+
+  resetCurrentFighterAreas();
+  makeCurrentFighterAreas();
+  showCurrentShuffledFighters(currentCatShow);
 })
