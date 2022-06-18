@@ -79,8 +79,13 @@ function showCurrentShuffledFighters(currentCat) {
       if (key == currentCat) current = value;
     }
 
+<<<<<<< HEAD
     for(let i = 0; i <= currentFighterAreas.length; i++) {
       if (current[i]) currentFighterAreas[i].innerHTML = current[i].fullName + '</br>' + '(' + current[i].coach + ')';
+=======
+    for (let i = 0; i <= currentFighterAreas.length; i++) {
+      if (current[i]) currentFighterAreas[i].textContent = current[i].fullName;
+>>>>>>> ae1238faf3d1b278cd67a0788a2f4f9804a2ac65
     }
   }
 }
@@ -172,8 +177,8 @@ function checkCurrentPull() {       // функция для проверки и
     for (let i = 0; i < pullFighterList.length; i += 2) { // изменяю отображение бойцов в зависимости от количества участников
       if (i < (diff) || (i >= (pullFighterList.length / 2) && i < (pullFighterList.length / 2 + (diff)))) {
         pullFighterList[i].classList.add('pull__fighter_hide');
-        pullFighterList[i+1].dataset.check = 'check'; // добавляю data свойство. Если оно есть, то поле получило номер для расчета пули
-        pullFighterList[i+1].classList.add(`fighter__${fighterNumber}`); // добавляю класс с номером поля
+        pullFighterList[i + 1].dataset.check = 'check'; // добавляю data свойство. Если оно есть, то поле получило номер для расчета пули
+        pullFighterList[i + 1].classList.add(`fighter__${fighterNumber}`); // добавляю класс с номером поля
         fighterNumber += 1; // увеличиваю нумерацию на 1
       }
     }
@@ -307,10 +312,11 @@ const suffleAllButton = document.querySelector('.suffle__all');
 
 
 
- // тасование Фишера-Йетса
- function shuffle(array) {
+// тасование Фишера-Йетса
+function shuffle(array) {
   let coachList = new Set(); // создаю коллекцию тренеров в данной категории
   let listByCoach = new Map(); // коллекция для хранения массивов участников по тренерам
+  let listSortedByCoach = []; // массив для хранения и сортировки по убыванию спортсменов по тренерам
 
 
   for (let item of array) { // сканирую список участникови добавляю тренеров
@@ -331,14 +337,15 @@ const suffleAllButton = document.querySelector('.suffle__all');
 
   makeCurrentFighterAreas();
 
-  for (let area of pullFighterList) {
-    //if ()
-  }
-
-  console.log(currentFighterAreas)
-
   console.log(listByCoach);
 
+
+  for (let [coach, team] of listByCoach)  {
+    listSortedByCoach.push(team);
+  }
+
+  listSortedByCoach.sort( (a, b) => b.length - a.length);
+  console.log(listSortedByCoach);
 
 
   for (let i = array.length - 1; i > 0; i--) {
@@ -346,12 +353,6 @@ const suffleAllButton = document.querySelector('.suffle__all');
     [array[i], array[j]] = [array[j], array[i]];
   }
 
-  /*
-  for (let i = 0; i < array.length; i++) {
-    currentFighterAreas[i].textContent = array[i].fullName;
-  }
-  */
-  console.log(array);
 
   shuffleCategories.set(currentCategoriesIndex, array);
 }
