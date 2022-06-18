@@ -82,10 +82,6 @@ function showCurrentShuffledFighters(currentCat) {
 <<<<<<< HEAD
     for(let i = 0; i <= currentFighterAreas.length; i++) {
       if (current[i]) currentFighterAreas[i].innerHTML = current[i].fullName + '</br>' + '(' + current[i].coach + ')';
-=======
-    for (let i = 0; i <= currentFighterAreas.length; i++) {
-      if (current[i]) currentFighterAreas[i].textContent = current[i].fullName;
->>>>>>> ae1238faf3d1b278cd67a0788a2f4f9804a2ac65
     }
   }
 }
