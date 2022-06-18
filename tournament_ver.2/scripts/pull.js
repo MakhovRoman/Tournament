@@ -80,7 +80,7 @@ function showCurrentShuffledFighters(currentCat) {
     }
 
     for(let i = 0; i <= currentFighterAreas.length; i++) {
-      if (current[i]) currentFighterAreas[i].textContent = current[i].fullName;
+      if (current[i]) currentFighterAreas[i].innerHTML = current[i].fullName + '</br>' + '(' + current[i].coach + ')';
     }
   }
 }
