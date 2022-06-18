@@ -79,7 +79,6 @@ function showCurrentShuffledFighters(currentCat) {
       if (key == currentCat) current = value;
     }
 
-<<<<<<< HEAD
     for(let i = 0; i <= currentFighterAreas.length; i++) {
       if (current[i]) currentFighterAreas[i].innerHTML = current[i].fullName + '</br>' + '(' + current[i].coach + ')';
     }
